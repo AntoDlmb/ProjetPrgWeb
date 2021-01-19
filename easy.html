@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<link type="text/css" rel="stylesheet" href="style.css">
+<head>
+	<title>Easy Mode</title>
+	<script type="text/javascript">
+		function MaxNumber(max){
+			localStorage.setItem('maxNumber',max); //On stock la variable dans le navigateur 
+			window.location.href = './gameInterface.html';
+			}
+		function RemoveRow(mouseEvent) {
+			let tabDataStr = localStorage.getItem('tabEasy');
+			let tabData;
+			tabData=StringToList(tabDataStr);
+			tabData.splice(event.target.getAttribute('indexValue'), 1);
+			localStorage.setItem('tabEasy',tabData);
+			mouseEvent.target.parentElement.parentElement.remove();
+
+		}
+
+		function StringToList(monStr){
+			let tab;
+			let arr=[];
+			tab=monStr.split(',');
+
+			tabFinal=[];
+			for (let e=0;e<tab.length;e++){
+				if (e%2==0){
+					arr.push(tab[e]);
+				}else{
+					arr.push(tab[e]);
+					tabFinal.push(arr);
+					arr=[]
+				}
+			}
+			return tabFinal;
+		}
+
+		function AddScores(chaineChar){
+			let tab;
+			tab=StringToList(chaineChar);
+
+			const tableScore = document.getElementById("tblscr");
+			for (let l=0;l<tab.length;l++){
+				const NewscoreRow = document.createElement("TR");
+				const NewScoreCell = document.createElement("TD");
+				const NewNbCell = document.createElement("TD");
+				const removeCell = document.createElement("TD");
+				const removeButton = document.createElement("BUTTON");
+
+				removeCell.setAttribute('class','rmButton');
+				
+				removeButton.innerText = "remove";
+				removeButton.setAttribute('indexValue',l)
+				removeButton.addEventListener("click", RemoveRow);
+				removeCell.appendChild(removeButton);
+				
+				valtemps=tab[l][1];
+				NbTentative=tab[l][0];
+				NewScoreCell.innerText = valtemps; 
+				NewNbCell.innerText = NbTentative;
+			
+				NewscoreRow.appendChild(NewNbCell);
+				NewscoreRow.appendChild(NewScoreCell);
+				NewscoreRow.appendChild(removeCell);
+				tableScore.appendChild(NewscoreRow);
+
+			}
+
+		}
+	</script>
+</head>
+
+<body onload="AddScores(localStorage.getItem('tabEasy'))">
+	
+	<div id="block">
+		<header> <h1>Easy Mode</h1>
+			<article>
+				<nav>
+					<a href="main.html">Home</a>
+					<a href="easy.html">Easy</a>
+					<a href="medium.html">Medium</a>
+					<a href="hard.html">Hard</a>
+				</nav>
+		</article>
+		</header>
+		<main>
+			<section id="section easy">
+				<article>Niveau Facile, juste prix entre 0 et 200</article>
+				<article><button onclick="MaxNumber(200)" style="padding: 10px;">Start</button></article>
+			</section>
+
+			<table border="1" id="tblscr">
+				<tr>
+					<th>Nombre de Tentatives</th>
+					<th>Temps</th>
+				</tr>
+			</table>
+			
+		</main>
+		<footer>
+			Copyright 2020 by AntHaWa Rights Reserved
+		</footer>
+	</div>	
+</body>
+</html>

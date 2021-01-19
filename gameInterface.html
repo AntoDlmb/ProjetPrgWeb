@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<link type="text/css" rel="stylesheet" href="style.css">
+<head>
+	<title>Game on</title>
+	<script type="text/javascript" src="script.js"></script>
+</head>
+
+<body>
+	<div id="block">
+	<header>
+		<h1 id="title">Appuyer sur Go pour lancer le chrono</h1>
+
+		<article>
+			<nav>
+				<a href="main.html" onclick="confirmation()">QUITTER</a>
+			</nav>
+		</article>
+		
+	</header>
+		<main id="Affichage Principal">
+			<section id="section1">
+				<article>
+					Ici on affichera le tableau des valeurs entrées dans la partie
+				</article>
+				<article>
+					<input type="number" id="nbInput" disabled="false" >
+					<button onclick="Start();startStop()" style="width: 100px;">Go!</button>
+					<div id="display">00m :00s :00ms</div>
+					
+				</article>
+			</section>
+		</main>
+	</div>
+
+</body>
+</html>
